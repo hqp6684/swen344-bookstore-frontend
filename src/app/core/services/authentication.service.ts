@@ -41,7 +41,8 @@ export class AuthenticationService {
       // WARNING this is a sketchy way of handling redirect after auth0 authenticated
       // TODO, create a seperate component to handle auth0 callback url
       window.setTimeout(() => {
-        this.router.navigate([bookstoreRedirectUrl]);
+        // this.router.navigate([bookstoreRedirectUrl]);
+        this.router.navigate(['/account/home']);
       }, 1000);
     });
 
@@ -65,6 +66,7 @@ export class AuthenticationService {
   public logout() {
     // Remove token from localStorage
     localStorage.removeItem('id_token');
+    localStorage.clear();
   }
 
 }
