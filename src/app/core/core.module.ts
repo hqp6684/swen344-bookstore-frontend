@@ -3,6 +3,7 @@ import { SharedModule } from '../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthenticationService } from './services/authentication.service';
+import { AuthGuardService } from './services/auth-guard.service';
 
 
 
@@ -13,7 +14,8 @@ import { AuthenticationService } from './services/authentication.service';
   ],
   declarations: [],
   providers: [
-    AuthenticationService
+    AuthenticationService,
+    AuthGuardService
   ]
 })
 export class CoreModule {

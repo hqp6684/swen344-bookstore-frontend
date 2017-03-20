@@ -10,6 +10,7 @@ export class AccountHomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
 
 }

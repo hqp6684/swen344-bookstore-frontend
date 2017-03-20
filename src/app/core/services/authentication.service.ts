@@ -8,7 +8,6 @@ import Auth0Lock from 'auth0-lock';
 
 @Injectable()
 export class AuthenticationService {
-  private userProfile: any;
   private lock = new Auth0Lock('nbpw8VSBhrjfONvZwh97xnHf27lq5fWf', 'hpham.auth0.com', {
     auth: {
       redirectUrl: location.origin + '/login',
@@ -17,14 +16,25 @@ export class AuthenticationService {
   });
 
 
+  /**
+   * Is used to redirect after login
+   */
+  private redirectUrlKey = 'redirectUrl';
+  redirectUrl: string;
+
+  id_token: string;
+  accountProfile: any;
+
+
   constructor(private router: Router, private route: ActivatedRoute) {
 
     this.lock.on('authenticated', (authResult) => {
       localStorage.setItem('id_token', authResult.idToken);
+      this.id_token = authResult.idToken;
 
-      const bookstoreRedirectUrl: any = localStorage.getItem('bookstoreRedirectUrl');
+      const bookstoreRedirectUrl: string = localStorage.getItem(this.redirectUrlKey);
       // // get rid of localStorage of url
-      localStorage.removeItem('bookstoreRedirectUrl');
+      localStorage.removeItem(this.redirectUrlKey);
       // navigate to original url
 
       // Fetch profile information
@@ -36,13 +46,13 @@ export class AuthenticationService {
         }
 
         localStorage.setItem('profile', JSON.stringify(profile));
-        this.userProfile = profile;
+        this.accountProfile = profile;
       });
       // WARNING this is a sketchy way of handling redirect after auth0 authenticated
       // TODO, create a seperate component to handle auth0 callback url
       window.setTimeout(() => {
         // this.router.navigate([bookstoreRedirectUrl]);
-        this.router.navigate(['/account/home']);
+        this.router.navigate([bookstoreRedirectUrl]);
       }, 1000);
     });
 
@@ -50,11 +60,13 @@ export class AuthenticationService {
 
 
   public login() {
-    localStorage.setItem('bookstoreRedirectUrl', this.router.url);
-
-    // Call the show method to display the widget.
-    this.lock.show(
-    );
+    if (this.redirectUrl) {
+      localStorage.setItem(this.redirectUrlKey, this.redirectUrl);
+    } else {
+      localStorage.setItem(this.redirectUrlKey, this.router.url);
+    }
+    // Call the show method to display the Auth0 widget.
+    this.lock.show();
   }
 
   public isAuthenticated(): boolean {
@@ -65,8 +77,9 @@ export class AuthenticationService {
 
   public logout() {
     // Remove token from localStorage
-    localStorage.removeItem('id_token');
+    // localStorage.removeItem('id_token');
     localStorage.clear();
+    this.router.navigate(['/home']);
   }
 
 }
