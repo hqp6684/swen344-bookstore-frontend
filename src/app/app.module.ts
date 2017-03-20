@@ -1,20 +1,31 @@
+import { AccountModule } from './account/account.module';
+import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { AppService } from './app.service';
+import { AppRoutingModule } from './app-routing.module';
+import { HomeComponent } from './components/home/home.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    PageNotFoundComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    HttpModule
+    SharedModule,
+    CoreModule.forRoot(),
+    AppRoutingModule,
+    AccountModule
   ],
-  providers: [],
+  providers: [AppService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

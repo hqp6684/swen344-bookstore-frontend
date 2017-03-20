@@ -1,0 +1,7 @@
+<md-toolbar color="primary">
+  <span id="riticon"></span>
+  <span class="md-toolbar-filler"></span>
+  <button md-button (click)="authService.login()" *ngIf="!authService.isAuthenticated()">Log In</button>
+  <button md-button (click)="authService.logout()" *ngIf="authService.isAuthenticated()">Log Out</button>
+
+</md-toolbar>
