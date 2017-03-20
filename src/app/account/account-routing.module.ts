@@ -5,7 +5,7 @@ import { AccountHomeComponent } from './components/account-home/account-home.com
 
 const routes: Routes = [
     {
-        path: 'account', children: [
+        path: '', children: [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: AccountHomeComponent }
         ]

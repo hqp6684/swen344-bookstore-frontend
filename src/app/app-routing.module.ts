@@ -8,6 +8,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
+    { path: 'account', loadChildren: 'app/account/account.module#AccountModule' },
     { path: '**', component: PageNotFoundComponent }
 ];
 
