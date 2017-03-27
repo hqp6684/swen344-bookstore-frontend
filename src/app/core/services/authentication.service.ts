@@ -1,6 +1,7 @@
 import { NavigationStart, Router, ActivatedRoute } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt';
+import { AccountProfile } from 'app/Account/account.service';
 
 import Auth0Lock from 'auth0-lock';
 // declare var Auth0Lock: any;
@@ -23,7 +24,7 @@ export class AuthenticationService {
   redirectUrl: string;
 
   id_token: string;
-  accountProfile: any;
+  private accountProfile: any;
 
 
   constructor(private router: Router, private route: ActivatedRoute) {
@@ -82,4 +83,11 @@ export class AuthenticationService {
     this.router.navigate(['/home']);
   }
 
+  getProfile(): AccountProfile | undefined {
+    if (this.isAuthenticated()) {
+      const profile: AccountProfile = JSON.parse(this.accountProfile);
+    } else {
+      return undefined;
+    }
+  }
 }

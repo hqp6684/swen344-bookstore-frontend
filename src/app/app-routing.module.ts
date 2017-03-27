@@ -9,6 +9,7 @@ const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'account', loadChildren: 'app/account/account.module#AccountModule' },
+    { path: 'admin', loadChildren: 'app/book-admin/book-admin.module#BookAdminModule' },
     { path: '**', component: PageNotFoundComponent }
 ];
 

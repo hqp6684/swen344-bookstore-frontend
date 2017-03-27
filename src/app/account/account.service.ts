@@ -7,15 +7,15 @@ export class AccountService {
   constructor(private authService: AuthenticationService) { }
 
   getProfile() {
-    const profile: AccountProfile = JSON.parse(this.authService.accountProfile);
-
+    // const profile: AccountProfile = JSON.parse(this.authService.accountProfile);
+    return this.authService.getProfile();
   }
 
 
 }
 
 
-interface AccountProfile {
+export interface AccountProfile {
   ClientID: string;
   created_at: string;
   email: string;

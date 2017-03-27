@@ -1,3 +1,4 @@
+import { BookAdminModule } from './book-admin/book-admin.module';
 import { AccountModule } from './account/account.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
@@ -23,7 +24,8 @@ import { HeaderComponent } from './components/header/header.component';
     SharedModule,
     CoreModule.forRoot(),
     AppRoutingModule,
-    AccountModule
+    AccountModule,
+    BookAdminModule
   ],
   providers: [AppService],
   bootstrap: [AppComponent]
