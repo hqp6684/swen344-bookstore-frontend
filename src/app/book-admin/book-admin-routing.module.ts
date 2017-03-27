@@ -10,8 +10,12 @@ const routes: Routes = [
         path: '', canActivate: [AuthGuardService],
         children: [
             { path: '', redirectTo: 'dash-board', pathMatch: 'full' },
-            { path: 'dash-board', component: DashBoardComponent, children: [] },
-            { path: 'create-book', component: CreateBookComponent },
+            {
+                path: 'dash-board', component: DashBoardComponent, children: [
+                    { path: 'create-book', component: CreateBookComponent },
+
+                ]
+            },
         ]
     }
 ];
