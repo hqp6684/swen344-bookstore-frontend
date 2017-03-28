@@ -1,0 +1,20 @@
+<md-toolbar>
+  <button md-button fxHide.xs>Advanced Search</button>
+  <div fxHide.xs fxHide.sm>
+    <button md-button="">New Releases</button>
+    <button md-button="">Best Sellers</button>
+    <button md-button="" routerLink="/book-management">Admin</button>
+
+  </div>
+  <span class="md-toolbar-filler"></span>
+  <md-input-container class="">
+    <button md-button md-prefix [mdMenuTriggerFor]="searchMenu">{{searchBy}}: </button>
+    <input mdInput>
+    <button md-icon-button="" md-suffix=""><md-icon>search</md-icon></button>
+  </md-input-container>
+</md-toolbar>
+<md-menu #searchMenu>
+  <button md-menu-item="" *ngFor="let type of searchTypes" (click)="searchBy=type">
+    <span>{{type}}</span>
+  </button>
+</md-menu>

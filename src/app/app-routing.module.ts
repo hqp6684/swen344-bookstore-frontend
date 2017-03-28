@@ -6,8 +6,9 @@ import { HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: '', redirectTo: 'bookstore', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
+    { path: 'bookstore', loadChildren: 'app/bookstore/bookstore.module#BookstoreModule' },
     { path: 'account', loadChildren: 'app/account/account.module#AccountModule' },
     // { path: 'admin', loadChildren: 'app/book-admin/book-admin.module#BookAdminModule' },
     { path: 'book-management', loadChildren: 'app/book-management/book-management.module#BookManagementModule' },

@@ -1,3 +1,6 @@
+import { BookManagementModule } from './book-management/book-management.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BookstoreModule } from './bookstore/bookstore.module';
 import { BookAdminModule } from './book-admin/book-admin.module';
 import { AccountModule } from './account/account.module';
 import { SharedModule } from './shared/shared.module';
@@ -23,9 +26,13 @@ import { HeaderComponent } from './components/header/header.component';
     BrowserModule,
     SharedModule,
     CoreModule.forRoot(),
+    BrowserAnimationsModule,
     AppRoutingModule,
-    AccountModule,
-    BookAdminModule
+    // AccountModule,
+    // BookAdminModule,
+    BookstoreModule,
+    BookManagementModule
+
   ],
   providers: [AppService],
   bootstrap: [AppComponent]

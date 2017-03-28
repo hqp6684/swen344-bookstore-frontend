@@ -1,7 +1,7 @@
 import { NavigationStart, Router, ActivatedRoute } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt';
-import { AccountProfile } from 'app/Account/account.service';
+import { AccountProfile } from 'app/account/account.service';
 
 import Auth0Lock from 'auth0-lock';
 // declare var Auth0Lock: any;
@@ -83,7 +83,7 @@ export class AuthenticationService {
     this.router.navigate(['/home']);
   }
 
-  getProfile(): AccountProfile | undefined {
+  getProfile(): AccountProfile {
     if (this.isAuthenticated()) {
       const profile: AccountProfile = JSON.parse(this.accountProfile);
     } else {
