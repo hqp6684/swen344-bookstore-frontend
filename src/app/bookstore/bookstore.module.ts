@@ -1,6 +1,5 @@
 import { BookstoreRoutingModule } from './bookstore-routing.module';
 import { SharedModule } from '../shared/shared.module';
-import { BookstoreComponent } from './bookstore.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BookstoreContainerComponent } from './components/bookstore-container/bookstore-container.component';
