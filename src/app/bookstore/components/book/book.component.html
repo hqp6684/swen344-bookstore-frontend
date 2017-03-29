@@ -1,0 +1,24 @@
+<md-card>
+  <!--<md-card-title>{{book.title}}</md-card-title>
+  <md-card-subtitle>Author</md-card-subtitle>-->
+  <img src="https://images-na.ssl-images-amazon.com/images/I/41YpfcnShoL._AC_US218_.jpg" alt="" md-card-image="">
+  <md-card-content>
+    <div><span>{{book.title}}</span></div>
+    <div><span>Author</span></div>
+    <div fxLayout="row">
+      <!--i.material-icons[fxFlex="10"]{start}*4-->
+      <i class="material-icons" fxFlex="10">start</i>
+      <i class="material-icons" fxFlex="10">start</i>
+      <i class="material-icons" fxFlex="10">start</i>
+      <i class="material-icons" fxFlex="10">start</i>
+      <span style="font-size: 10px">342</span>
+    </div>
+    <div flexLayout="row" fxLayoutAlign="end center">
+      <span>{{book.price|currency:'USD':true}}</span>
+      <button md-icon-button="">
+        <md-icon>add_shopping_cart</md-icon>
+      </button>
+    </div>
+
+  </md-card-content>
+</md-card>

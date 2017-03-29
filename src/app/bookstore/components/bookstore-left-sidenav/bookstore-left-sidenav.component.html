@@ -1,15 +1,32 @@
-<md-list>
-  <h3 md-subheader>Folders</h3>
-  <md-list-item *ngFor="let folder of folders">
-    <md-icon md-list-avatar>folder</md-icon>
-    <h4 md-line>{{folder.name}}</h4>
-    <p md-line> {{folder.updated | date}} </p>
+<md-nav-list>
+  <h3 md-subheader>Book Filter Options</h3>
+  <md-list-item>
+    <button md-button="">
+    Filter Option 1
+    </button>
+  </md-list-item>
+  <md-list-item>
+    <button md-button="">
+      Filter Option 2
+    </button>
   </md-list-item>
   <md-divider></md-divider>
-  <h3 md-subheader>Notes</h3>
-  <md-list-item *ngFor="let note of notes">
-    <md-icon md-list-avatar>note</md-icon>
-    <h4 md-line>{{note.name}}</h4>
-    <p md-line> {{note.updated | date}} </p>
+  <h3 md-subheader>Book Management Menu</h3>
+  <md-list-item>
+    <button md-button="">
+    Add Book
+    </button>
   </md-list-item>
-</md-list>
+  <md-list-item>
+    <button md-button="">
+    Tagging
+    </button>
+  </md-list-item>
+  <md-divider></md-divider>
+  <h3 md-subheader>Admin</h3>
+  <md-list-item>
+    <button md-button="">
+    Inventory
+    </button>
+  </md-list-item>
+  <md-nav-list>
