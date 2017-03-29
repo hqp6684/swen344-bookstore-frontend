@@ -7,12 +7,12 @@
   <span class="md-toolbar-filler"></span>
   <md-input-container class="">
     <button md-button md-prefix [mdMenuTriggerFor]="searchMenu">{{searchBy}}: </button>
-    <input mdInput>
+    <input mdInput #searchInput>
     <button md-icon-button="" md-suffix=""><md-icon>search</md-icon></button>
   </md-input-container>
 </md-toolbar>
 <md-menu #searchMenu>
-  <button md-menu-item="" *ngFor="let type of searchTypes" (click)="searchBy=type">
+  <button md-menu-item="" *ngFor="let type of searchTypes" (click)="searchBy=type; searchInput.focus()">
     <span>{{type}}</span>
   </button>
 </md-menu>
