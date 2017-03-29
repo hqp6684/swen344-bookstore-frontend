@@ -1,7 +1,6 @@
 import { BookManagementModule } from './book-management/book-management.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BookstoreModule } from './bookstore/bookstore.module';
-import { BookAdminModule } from './book-admin/book-admin.module';
 import { AccountModule } from './account/account.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
