@@ -6,11 +6,22 @@ import { AuthenticationService } from './services/authentication.service';
 import { AuthGuardService } from './services/auth-guard.service';
 
 
+import { AngularFireModule } from 'angularfire2';
+// import {A}
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { firebaseConfig } from '../../environments/firebase.config';
+
+
+
+
+
 
 @NgModule({
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule
   ],
   declarations: [],
   providers: [

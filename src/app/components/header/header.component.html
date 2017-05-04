@@ -1,7 +1,8 @@
 <md-toolbar color="primary">
   <span id="riticon"></span>
   <span class="md-toolbar-filler"></span>
-  <button md-button (click)="authService.login()" *ngIf="!authService.isAuthenticated()">Log In</button>
+  <!--<button md-button (click)="authService.login()" *ngIf="!authService.isAuthenticated()">Log In</button>-->
+  <button md-button routerLink='/login' *ngIf="!authService.isAuthenticated()">Log In</button>
   <button md-button (click)="authService.logout()" *ngIf="authService.isAuthenticated()">Log Out</button>
   <button md-icon-button="">
     <md-icon>shopping_cart</md-icon>

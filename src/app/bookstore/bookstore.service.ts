@@ -11,9 +11,10 @@ export class BookstoreService {
 
 
   getAllBooks(): Observable<Book[]> {
-    return this.http.get(this.apiRootUrl.concat('/books')).map(res => {
-      return res.json();
-    });
+    // return this.http.get(this.apiRootUrl.concat('/books')).map(res => {
+    //   return res.json();
+    // });
+    return Observable.of([]);
 
   }
 

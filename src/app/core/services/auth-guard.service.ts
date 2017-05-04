@@ -1,11 +1,12 @@
 import { AuthenticationService } from './authentication.service';
+import { Router } from '@angular/router';
 import { ActivatedRoute, ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
 
-  constructor(private authService: AuthenticationService) { }
+  constructor(private authService: AuthenticationService, private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const url = state.url;
@@ -17,7 +18,10 @@ export class AuthGuardService implements CanActivate {
       return true;
     } else {
       this.authService.redirectUrl = url;
-      this.authService.login();
+      // this.authService.login();
+      this.router.navigate([
+        '/login'
+      ]);
       return false;
     }
   }

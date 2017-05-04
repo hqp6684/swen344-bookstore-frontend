@@ -1,0 +1,29 @@
+<md-card fxLayout="column" fxLayoutAlign="center center">
+  <md-card-title>Login</md-card-title>
+
+  <md-input-container>
+    <input mdInput placeholder="Email" type="email" required [formControl]="emailFormControl">
+    <md-icon mdSuffix>{{emailStatus}}</md-icon>
+  </md-input-container>
+
+  <md-input-container>
+    <input mdInput placeholder="Password" type="password" required>
+  </md-input-container>
+  <div>
+    <p>{{this.message}}</p>
+  </div>
+  <div fxlayout="row" fxLayoutAlign="center">
+    <button md-raised-button routerLink="/">Canel</button>
+    <span fxFlex="10px"></span>
+    <button md-raised-button color="primary" [disabled]="!this.formIsValid" (click)="login()">Login</button>
+  </div>
+  <div>
+    <p>Don't have an account ? Click <strong style="cursor:pointer"><a routerLink="/register">here</a></strong> to Register
+    </p>
+  </div>
+
+
+
+
+
+</md-card>

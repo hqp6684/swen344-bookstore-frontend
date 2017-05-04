@@ -1,20 +1,15 @@
 import { NavigationStart, Router, ActivatedRoute } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { tokenNotExpired } from 'angular2-jwt';
 import { AccountProfile } from 'app/account/account.service';
 
-import Auth0Lock from 'auth0-lock';
-// declare var Auth0Lock: any;
+
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Account } from '../../shared/models/account';
+
 
 
 @Injectable()
 export class AuthenticationService {
-  private lock = new Auth0Lock('nbpw8VSBhrjfONvZwh97xnHf27lq5fWf', 'hpham.auth0.com', {
-    auth: {
-      redirectUrl: location.origin + '/login',
-      responseType: 'token',
-    }
-  });
 
 
   /**
@@ -25,67 +20,64 @@ export class AuthenticationService {
 
   id_token: string;
   private accountProfile: any;
+  account: Account;
+  private authenticated = false;
 
 
-  constructor(private router: Router, private route: ActivatedRoute) {
 
-    this.lock.on('authenticated', (authResult) => {
-      localStorage.setItem('id_token', authResult.idToken);
-      this.id_token = authResult.idToken;
-
-      const bookstoreRedirectUrl: string = localStorage.getItem(this.redirectUrlKey);
-      // // get rid of localStorage of url
-      localStorage.removeItem(this.redirectUrlKey);
-      // navigate to original url
-
-      // Fetch profile information
-      this.lock.getProfile(authResult.idToken, (error: any, profile: any) => {
-        if (error) {
-          // Handle error
-          alert(error);
-          return;
-        }
-
-        localStorage.setItem('profile', JSON.stringify(profile));
-        this.accountProfile = profile;
-      });
-      // WARNING this is a sketchy way of handling redirect after auth0 authenticated
-      // TODO, create a seperate component to handle auth0 callback url
-      window.setTimeout(() => {
-        // this.router.navigate([bookstoreRedirectUrl]);
-        this.router.navigate([bookstoreRedirectUrl]);
-      }, 1000);
-    });
+  constructor(private router: Router, private route: ActivatedRoute, private db: AngularFireDatabase) {
 
   }
 
 
-  public login() {
-    if (this.redirectUrl) {
-      localStorage.setItem(this.redirectUrlKey, this.redirectUrl);
-    } else {
-      localStorage.setItem(this.redirectUrlKey, this.router.url);
-    }
+  public login(email: string, pass?: string) {
+    this.db.list('/accounts', {
+      query: {
+        orderByChild: 'email',
+        equalTo: email,
+        limitToFirst: 1
+      }
+    }).subscribe(acc => {
+      if (acc.length === 1) {
+        // check pass here
+        // if acc.pass === pass
+        // but pass for now
+        this.account = acc[0];
+        this.authenticated = true;
+        // localStorage.setItem('isAuthenticated')
+        this.router.navigate(['/']);
+
+      } else {
+        this.router.navigate(['/login']);
+      }
+    });
+    // if (this.redirectUrl) {
+    //   localStorage.setItem(this.redirectUrlKey, this.redirectUrl);
+    // } else {
+    //   localStorage.setItem(this.redirectUrlKey, this.router.url);
+    // }
     // Call the show method to display the Auth0 widget.
-    this.lock.show();
   }
 
   public isAuthenticated(): boolean {
     // Check if there's an unexpired JWT
     // This searches for an item in localStorage with key == 'id_token'
-    return tokenNotExpired();
+    return this.authenticated;
   }
 
   public logout() {
     // Remove token from localStorage
     // localStorage.removeItem('id_token');
     localStorage.clear();
+    this.account = null;
+    this.authenticated = false;
     this.router.navigate(['/home']);
   }
 
-  getProfile(): AccountProfile {
+  getProfile() {
     if (this.isAuthenticated()) {
-      const profile: AccountProfile = JSON.parse(this.accountProfile);
+      // const profile: AccountProfile = JSON.parse(this.accountProfile);
+      return this.account;
     } else {
       return undefined;
     }
