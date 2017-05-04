@@ -44,7 +44,8 @@ export class AuthenticationService {
         // but pass for now
         this.account = acc[0];
         this.authenticated = true;
-        // localStorage.setItem('isAuthenticated')
+
+        localStorage.setItem('isAuthenticated', '1');
         this.router.navigate(['/']);
 
       } else {
@@ -62,6 +63,9 @@ export class AuthenticationService {
   public isAuthenticated(): boolean {
     // Check if there's an unexpired JWT
     // This searches for an item in localStorage with key == 'id_token'
+    if (localStorage.getItem('isAuthenticated') === '1') {
+      this.authenticated = true;
+    }
     return this.authenticated;
   }
 

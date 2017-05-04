@@ -17,6 +17,9 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { AngularFireModule } from 'angularfire2';
 import { firebaseConfig } from '../environments/firebase.config';
+import { BooksComponent } from './components/books/books.component';
+import { NewBookComponent } from './components/new-book/new-book.component';
+import { BookDetailComponent } from './components/book-detail/book-detail.component';
 
 
 
@@ -28,7 +31,10 @@ import { firebaseConfig } from '../environments/firebase.config';
     PageNotFoundComponent,
     HeaderComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    BooksComponent,
+    NewBookComponent,
+    BookDetailComponent
   ],
   imports: [
     BrowserModule,
