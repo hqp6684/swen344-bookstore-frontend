@@ -46,6 +46,7 @@ export class AuthenticationService {
         this.authenticated = true;
 
         localStorage.setItem('isAuthenticated', '1');
+        localStorage.setItem('account', JSON.stringify(this.account));
         this.router.navigate(['/']);
 
       } else {
@@ -65,6 +66,7 @@ export class AuthenticationService {
     // This searches for an item in localStorage with key == 'id_token'
     if (localStorage.getItem('isAuthenticated') === '1') {
       this.authenticated = true;
+      this.account = JSON.parse(localStorage.getItem('account'));
     }
     return this.authenticated;
   }

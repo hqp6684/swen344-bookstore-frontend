@@ -6,13 +6,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Book, Author } from '../../shared/models/book';
 import { MdSnackBar } from '@angular/material';
-
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({
-  selector: 'app-new-book',
-  templateUrl: './new-book.component.html',
-  styleUrls: ['./new-book.component.scss']
+  selector: 'app-book-edit',
+  templateUrl: './book-edit.component.html',
+  styleUrls: ['./book-edit.component.scss']
 })
-export class NewBookComponent implements OnInit {
+export class BookEditComponent implements OnInit {
   isbnStatus = '';
   isbnFormControl = new FormControl();
   authorFormControl = new FormControl();
@@ -24,8 +24,8 @@ export class NewBookComponent implements OnInit {
     } else { return false; }
 
   }
-  book = new Book();
-
+  bookUrl: string;
+  book: Book = new Book();
   message = '';
   filteredAuthors: Observable<string[]>;
   filteredClasses: Observable<string[]>;
@@ -34,7 +34,9 @@ export class NewBookComponent implements OnInit {
     private db: AngularFireDatabase,
     private http: Http,
     public authService: AuthenticationService,
-    private snackBar: MdSnackBar
+    private snackBar: MdSnackBar,
+    private router: Router,
+    private route: ActivatedRoute,
 
   ) {
 
@@ -66,6 +68,24 @@ export class NewBookComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.bookUrl = this.route.snapshot.params['id'];
+
+    this.db.list('/books', {
+      query: {
+        orderByChild: 'isbn',
+        equalTo: this.bookUrl
+      }
+    }).subscribe(books => {
+      if (books.length === 0) {
+        this.router.navigate(['/']);
+      }
+      books[0].authors ? books[0].authors : books[0].authors = [];
+      books[0].courses ? books[0].courses : books[0].courses = [];
+      books[0].reviews ? books[0].reviews : books[0].reviews = new Array();
+      this.book = books[0];
+    });
+
+
     this.isbnFormControl.valueChanges
       .filter(value => {
         if (value.length >= 9 && value.length < 13 && !isNaN(value)) {
@@ -147,10 +167,11 @@ export class NewBookComponent implements OnInit {
   }
 
   createBook() {
-    this.db.list('/books').push(this.book);
-    this.snackBar.open(`${this.book.isbn} has been addded`, 'Dismiss', { duration: 4000 });
+    const ref = this.db.object('/books/'.concat(this.book.$key));
+    ref.update(this.book);
 
-    this.book = new Book();
+    this.snackBar.open(`${this.book.isbn} has been updated`, 'Dismiss', { duration: 4000 });
+
   }
 
 

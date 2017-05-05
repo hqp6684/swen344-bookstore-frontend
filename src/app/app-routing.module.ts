@@ -1,4 +1,5 @@
 import { AuthGuardService } from './core/services/auth-guard.service';
+import { NoStudentGuarddService } from './core/services/no-student-guardd.service';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -12,6 +13,11 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { NewBookComponent } from './components/new-book/new-book.component';
 import { BookDetailComponent } from './components/book-detail/book-detail.component';
+import { BookEditComponent } from './components/book-edit/book-edit.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { OrdersComponent } from './components/orders/orders.component';
+import { OrderDetailComponent } from './components/order-detail/order-detail.component';
+
 
 const routes: Routes = [
     { path: '', redirectTo: 'books', pathMatch: 'full' },
@@ -23,7 +29,7 @@ const routes: Routes = [
                 component: BooksComponent
             },
             {
-                canActivate: [AuthGuardService],
+                canActivate: [AuthGuardService, NoStudentGuarddService],
                 path: 'new',
                 component: NewBookComponent,
             },
@@ -31,15 +37,27 @@ const routes: Routes = [
                 path: ':id',
                 children: [
                     { path: '', component: BookDetailComponent },
+                    { path: 'edit', component: BookEditComponent, canActivate: [AuthGuardService, NoStudentGuarddService] },
                 ]
             },
 
         ]
     },
-    { path: 'bookstore', loadChildren: 'app/bookstore/bookstore.module#BookstoreModule' },
-    { path: 'account', loadChildren: 'app/account/account.module#AccountModule' },
+    {
+        path: 'orders', canActivate: [AuthGuardService],
+        children: [
+            { path: '', component: OrdersComponent },
+            { path: ':id', component: OrderDetailComponent }
+
+        ]
+
+    },
+    { path: 'checkout', component: CheckoutComponent },
+
+    // { path: 'bookstore', loadChildren: 'app/bookstore/bookstore.module#BookstoreModule' },
+    // { path: 'account', loadChildren: 'app/account/account.module#AccountModule' },
     // { path: 'admin', loadChildren: 'app/book-admin/book-admin.module#BookAdminModule' },
-    { path: 'book-management', loadChildren: 'app/book-management/book-management.module#BookManagementModule' },
+    // { path: 'book-management', loadChildren: 'app/book-management/book-management.module#BookManagementModule' },
     { path: 'register', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
     { path: '**', component: PageNotFoundComponent }

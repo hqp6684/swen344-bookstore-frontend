@@ -1,3 +1,4 @@
+import { NoStudentGuarddService } from './services/no-student-guardd.service';
 import { ModuleWithProviders, Optional, SkipSelf } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { NgModule } from '@angular/core';
@@ -10,6 +11,9 @@ import { AngularFireModule } from 'angularfire2';
 // import {A}
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { firebaseConfig } from '../../environments/firebase.config';
+
+import { OrderService } from './services/order.service';
+import 'rxjs';
 
 
 
@@ -26,7 +30,9 @@ import { firebaseConfig } from '../../environments/firebase.config';
   declarations: [],
   providers: [
     AuthenticationService,
-    AuthGuardService
+    AuthGuardService,
+    NoStudentGuarddService,
+    OrderService
   ]
 })
 export class CoreModule {

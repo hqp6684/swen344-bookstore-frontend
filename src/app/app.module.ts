@@ -1,7 +1,4 @@
-import { BookManagementModule } from './book-management/book-management.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BookstoreModule } from './bookstore/bookstore.module';
-import { AccountModule } from './account/account.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,6 +17,10 @@ import { firebaseConfig } from '../environments/firebase.config';
 import { BooksComponent } from './components/books/books.component';
 import { NewBookComponent } from './components/new-book/new-book.component';
 import { BookDetailComponent } from './components/book-detail/book-detail.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { OrdersComponent } from './components/orders/orders.component';
+import { OrderDetailComponent } from './components/order-detail/order-detail.component';
+import { BookEditComponent } from './components/book-edit/book-edit.component';
 
 
 
@@ -34,7 +35,11 @@ import { BookDetailComponent } from './components/book-detail/book-detail.compon
     LoginComponent,
     BooksComponent,
     NewBookComponent,
-    BookDetailComponent
+    BookDetailComponent,
+    CheckoutComponent,
+    OrdersComponent,
+    OrderDetailComponent,
+    BookEditComponent
   ],
   imports: [
     BrowserModule,
@@ -46,8 +51,8 @@ import { BookDetailComponent } from './components/book-detail/book-detail.compon
     AppRoutingModule,
     // AccountModule,
     // BookAdminModule,
-    BookstoreModule,
-    BookManagementModule
+    // BookstoreModule,
+    // BookManagementModule
 
   ],
   providers: [AppService],

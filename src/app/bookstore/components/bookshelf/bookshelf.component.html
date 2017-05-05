@@ -1,7 +1,0 @@
-<!--<p>
-  bookshelf works! {{books|async|json}}
-</p>-->
-<div fxLayoutWrap fxLayout="row" fxLayoutAlign="space-around start">
-  <app-book *ngFor="let book of books | async as list" [book]="book"></app-book>
-
-</div>

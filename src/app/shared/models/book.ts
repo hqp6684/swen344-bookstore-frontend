@@ -1,15 +1,28 @@
 
 export class Book {
-    key$: string;
-    isbn: number;
+    $key?: string;
+    isbn: string;
     title: string;
     // published_by: number;
     price: number;
     available: boolean;
     count: number;
-    authors: Author[];
+    thumbnail_url: string;
+    authors: string[];
     reviews: Review[];
-    courses: Course[];
+    courses: string[];
+    constructor() {
+        // this.key$ = '';
+        this.isbn = '';
+        this.title = '';
+        this.price = 0;
+        this.count = 0;
+        this.thumbnail_url = '';
+        this.available = false;
+        this.authors = new Array();
+        this.reviews = new Array();
+        this.courses = new Array();
+    }
 
 }
 
@@ -19,8 +32,13 @@ export class Author {
 
 export class Review {
     email: string;
-    time: Date;
+    time: string;
     content: string;
+    constructor(content: string, email: string) {
+        this.content = content;
+        this.email = email;
+        this.time = new Date().toDateString();
+    }
 }
 
 

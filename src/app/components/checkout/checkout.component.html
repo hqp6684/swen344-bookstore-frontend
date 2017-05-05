@@ -1,0 +1,32 @@
+<md-card>
+  <md-card-title>Checkout</md-card-title>
+  <md-card-content>
+    LIST of book
+    <md-list>
+      <md-list-item>
+        <md-icon md-list-icon>folder</md-icon>
+        <h3 md-line> Title </h3>
+        <button md-button="">Price</button>
+      </md-list-item>
+      <md-list-item *ngFor="let book of orderService.books">
+        <md-icon md-list-icon>folder</md-icon>
+        <h3 md-line> {{book.title}} </h3>
+        <!--<p md-line>
+      <span> {{message.subject}} </span>
+      <span class="demo-2"> -- {{message.content}} </span>
+    </p>-->
+        <button md-button="">{{book.price}}</button>
+      </md-list-item>
+      <md-list-item>
+        <md-icon md-list-icon>folder</md-icon>
+        <h3 md-line> Total </h3>
+        <button md-button="">{{total}}</button>
+      </md-list-item>
+    </md-list>
+
+  </md-card-content>
+  <md-card-actions align="end">
+    <button md-raised-button="" routerLink='/'>Cancel</button>
+    <button md-raised-button="" color="primary">Confirm</button>
+  </md-card-actions>
+</md-card>

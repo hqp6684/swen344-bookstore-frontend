@@ -4,8 +4,11 @@
   <!--<button md-button (click)="authService.login()" *ngIf="!authService.isAuthenticated()">Log In</button>-->
   <button md-button routerLink='/login' *ngIf="!authService.isAuthenticated()">Log In</button>
   <button md-button (click)="authService.logout()" *ngIf="authService.isAuthenticated()">Log Out</button>
-  <button md-icon-button="">
-    <md-icon>shopping_cart</md-icon>
+  <button md-button="" routerLink="/checkout">
+    <md-icon>shopping_cart</md-icon> {{orderService.books.length}}
+  </button>
+  <button md-button *ngIf="authService.isAuthenticated()" routerLink="/orders">
+    <md-icon>account_circle</md-icon>
   </button>
 
 </md-toolbar>

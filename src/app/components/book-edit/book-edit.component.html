@@ -2,8 +2,7 @@
   <md-card-title>New Book</md-card-title>
   <div fxFlex="row" fxLayoutWrap="wrap" fxLayoutAlign="center center">
     <md-input-container fxFlex="80">
-      <input mdInput placeholder="ISBN" required [formControl]="isbnFormControl">
-      <md-icon mdSuffix>{{isbnStatus}}</md-icon>
+      <input mdInput placeholder="ISBN" disabled [(ngModel)]="book.isbn">
     </md-input-container>
     <p>{{message}}</p>
     <md-input-container fxFlex="80">
@@ -59,9 +58,38 @@
   </div>
   <div>
     <button md-raised-button="" routerLink='/'>Cancel</button>
-    <button md-raised-button="" color="primary" [disabled]="!formIsValid" (click)="createBook()">Create</button>
+    <button md-raised-button="" color="primary" [disabled]="!formIsValid" (click)="createBook()">Update</button>
   </div>
 
 
 
+</md-card>
+<md-card>
+  <md-card-title>Reviews</md-card-title>
+  <md-card-content>
+    <p *ngIf="this.book.reviews.length === 0">
+      :=( Your list is empty
+    </p>
+    <md-list>
+      <md-list-item *ngFor="let review of this.book.reviews">
+        <img md-list-avatar src="{{'http://'}}" alt="...">
+        <!--<h3 md-line class="click-me" (click)="this.readMore(article)"> {{article.title}} </h3>-->
+        <p md-line>
+          <span> {{review.content}} </span>
+        </p>
+        <p md-line="">{{review.time|date:'medium'}} by {{review.email}}</p>
+        <button md-icon-button="" md-tooltip="Remove">
+        <md-icon>delete</md-icon>
+        </button>
+      </md-list-item>
+    </md-list>
+  </md-card-content>
+  <!--<md-card-actions>
+    <md-input-container style="min-width: 50%">
+      <textarea mdInput #reviewInput placeholder="Review"></textarea>
+    </md-input-container>
+    <button md-button="" color="primary" (click)="addReview(reviewInput.value)" [disabled]="reviewInput.value.length===0">Submit</button>
+    <button md-button="" routerLink='/'>Back</button>
+
+  </md-card-actions>-->
 </md-card>

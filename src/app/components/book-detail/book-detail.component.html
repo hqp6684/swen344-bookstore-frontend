@@ -1,3 +1,74 @@
-<p>
-  book-detail works!
-</p>
+<md-card fxLayout="column" fxLayoutAlign="center center">
+  <md-card-title>Book Detail</md-card-title>
+  <div fxFlex="row" fxLayoutWrap="wrap" fxLayoutAlign="center center">
+    <md-input-container fxFlex="80">
+      <input mdInput placeholder="ISBN" required disabled>
+    </md-input-container>
+    <md-input-container fxFlex="80">
+      <input mdInput placeholder="Title" required [(ngModel)]="book.title" disabled="">
+    </md-input-container>
+    <!---->
+
+    <md-input-container fxFlex="80">
+      <input mdInput placeholder="Thumbnail URL" required disabled [(ngModel)]="book.thumbnail_url">
+    </md-input-container>
+    <!---->
+    <div fxFlex="80" style="margin-bottom:1rem;">
+      <md-card-subtitle>Authors:</md-card-subtitle>
+      <md-chip-list>
+        <md-chip *ngFor="let author of book.authors; let i = index;">{{author}}</md-chip>
+      </md-chip-list>
+      <!--<div fxFlex="40">-->
+      <!--</div>-->
+    </div>
+    <!---->
+    <div fxFlex="80">
+      <md-card-subtitle>Courses:</md-card-subtitle>
+      <md-chip-list>
+        <md-chip *ngFor="let course of book.courses; let i = index;">{{course}}</md-chip>
+      </md-chip-list>
+    </div>
+
+    <div>
+      <md-input-container>
+        <i mdPrefix>$</i><input disabled mdInput placeholder="Price" required [(ngModel)]="book.price">
+
+      </md-input-container>
+      <md-input-container>
+        <input mdInput placeholder="Count" disabled type="number" min="0" [(ngModel)]="book.count">
+      </md-input-container>
+      <md-checkbox disabled [(ngModel)]="book.available">Available</md-checkbox>
+
+    </div>
+  </div>
+</md-card>
+
+<md-card>
+  <md-card-title>Reviews</md-card-title>
+  <md-card-content>
+    <p *ngIf="this.book.reviews.length === 0">
+      :=( Your list is empty
+    </p>
+    <md-list>
+      <md-list-item *ngFor="let review of this.book.reviews">
+        <img md-list-avatar src="{{'http://'}}" alt="...">
+        <!--<h3 md-line class="click-me" (click)="this.readMore(article)"> {{article.title}} </h3>-->
+        <p md-line>
+          <span> {{review.content}} </span>
+        </p>
+        <p md-line="">{{review.time|date:'medium'}}</p>
+        <!--<button md-icon-button="" md-tooltip="Remove {{article.title}} from favorite list" (click)="this.rssService.removeFavorite(article)">-->
+        <!--<md-icon>delete</md-icon>-->
+        <!--</button>-->
+      </md-list-item>
+    </md-list>
+  </md-card-content>
+  <md-card-actions>
+    <md-input-container style="min-width: 50%">
+      <textarea mdInput #reviewInput placeholder="Review"></textarea>
+    </md-input-container>
+    <button md-button="" color="primary" (click)="addReview(reviewInput.value)" [disabled]="reviewInput.value.length===0">Submit</button>
+    <button md-button="" routerLink='/'>Back</button>
+
+  </md-card-actions>
+</md-card>
