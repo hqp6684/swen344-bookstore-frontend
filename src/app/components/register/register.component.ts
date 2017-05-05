@@ -50,7 +50,7 @@ export class RegisterComponent implements OnInit {
 
   }
 
-  private newAccount() {
+  newAccount() {
     const key = this.accRef.push(this.account).key;
     this.authService.login(this.account.email);
   }

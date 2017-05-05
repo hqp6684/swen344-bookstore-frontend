@@ -1,7 +1,5 @@
 import { NavigationStart, Router, ActivatedRoute } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { AccountProfile } from 'app/account/account.service';
-
 
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Account } from '../../shared/models/account';
