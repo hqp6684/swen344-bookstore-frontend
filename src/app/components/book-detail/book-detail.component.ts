@@ -15,6 +15,8 @@ export class BookDetailComponent implements OnInit {
 
   bookUrl: string;
   book: Book = new Book();
+  rate = 5;
+  rates = [1, 2, 3, 4, 5];
 
   constructor(
     private router: Router,
@@ -47,7 +49,7 @@ export class BookDetailComponent implements OnInit {
   }
 
   addReview(content) {
-    const review = new Review(content, this.authService.account.email);
+    const review = new Review(content, this.authService.account.email, this.rate);
     let ref = this.db.object('/books/'.concat(this.book.$key));
     this.book.reviews.push(review);
     ref.update(this.book);

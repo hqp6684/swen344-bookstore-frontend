@@ -21,6 +21,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 import { BookEditComponent } from './components/book-edit/book-edit.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 
 
@@ -39,7 +40,8 @@ import { BookEditComponent } from './components/book-edit/book-edit.component';
     CheckoutComponent,
     OrdersComponent,
     OrderDetailComponent,
-    BookEditComponent
+    BookEditComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,

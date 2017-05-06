@@ -1,0 +1,8 @@
+<h4 md-dialog-title>Confirmation</h4>
+<md-dialog-container>
+  <p>{{data.message}}</p>
+</md-dialog-container>
+<md-dialog-actions>
+  <button md-raised-button="" color="primary" md-dialog-close="" (click)="dialogRef.close(false)">NO</button>
+  <button md-raised-button="" color="primary" md-dialog-close="" (click)="dialogRef.close(true)">YES</button>
+</md-dialog-actions>

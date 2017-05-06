@@ -1,5 +1,8 @@
+<md-toolbar>
+  <h3>Book Detail</h3>
+</md-toolbar>
+<!---->
 <md-card fxLayout="column" fxLayoutAlign="center center">
-  <md-card-title>Book Detail</md-card-title>
   <div fxFlex="row" fxLayoutWrap="wrap" fxLayoutAlign="center center">
     <md-input-container fxFlex="80">
       <input mdInput placeholder="ISBN" required disabled>
@@ -29,10 +32,9 @@
       </md-chip-list>
     </div>
 
-    <div>
+    <div style="margin-top:10px">
       <md-input-container>
         <i mdPrefix>$</i><input disabled mdInput placeholder="Price" required [(ngModel)]="book.price">
-
       </md-input-container>
       <md-input-container>
         <input mdInput placeholder="Count" disabled type="number" min="0" [(ngModel)]="book.count">
@@ -40,6 +42,11 @@
       <md-checkbox disabled [(ngModel)]="book.available">Available</md-checkbox>
 
     </div>
+  </div>
+
+  <div>
+    <button md-raised-button="" routerLink='/'>Back</button>
+    <button md-raised-button="" color="primary" routerLink="edit">Edit</button>
   </div>
 </md-card>
 
@@ -49,26 +56,35 @@
     <p *ngIf="this.book.reviews.length === 0">
       :=( Your list is empty
     </p>
-    <md-list>
+    <md-nav-list>
       <md-list-item *ngFor="let review of this.book.reviews">
-        <img md-list-avatar src="{{'http://'}}" alt="...">
+        <img md-list-avatar src="{{'https://img.clipartfest.com/5a68d99cd467003c04b4ef64004c4313_download-this-image-as-profile-picture-clipart_600-557.png'}}"
+          alt="...">
         <!--<h3 md-line class="click-me" (click)="this.readMore(article)"> {{article.title}} </h3>-->
         <p md-line>
           <span> {{review.content}} </span>
         </p>
-        <p md-line="">{{review.time|date:'medium'}}</p>
-        <!--<button md-icon-button="" md-tooltip="Remove {{article.title}} from favorite list" (click)="this.rssService.removeFavorite(article)">-->
-        <!--<md-icon>delete</md-icon>-->
-        <!--</button>-->
+        <span md-line>
+        <md-icon *ngFor="let rate of [1,2,3,4,5]">star_rate</md-icon>
+        </span>
+        <p md-line="">{{review.time|date:'medium'}} by {{review.email}}</p>
+        <button md-icon-button="" md-tooltip="Report problem">
+        <md-icon>report_problem</md-icon>
+        </button>
       </md-list-item>
-    </md-list>
+    </md-nav-list>
   </md-card-content>
   <md-card-actions>
     <md-input-container style="min-width: 50%">
       <textarea mdInput #reviewInput placeholder="Review"></textarea>
     </md-input-container>
-    <button md-button="" color="primary" (click)="addReview(reviewInput.value)" [disabled]="reviewInput.value.length===0">Submit</button>
-    <button md-button="" routerLink='/'>Back</button>
+    <md-select placeholder="Star(s)" [(ngModel)]="rate" name="rate">
+      <md-option *ngFor="let rate of [1,2,3,4,5]" [value]="rate">
+        {{rate}}
+      </md-option>
+    </md-select>
+    <button md-button="" color="primary" (click)="addReview(reviewInput.value); reviewInput.value=''" [disabled]="reviewInput.value.length===0">Submit</button>
+    <button md-raised-button="" routerLink='/'>Back</button>
 
   </md-card-actions>
 </md-card>

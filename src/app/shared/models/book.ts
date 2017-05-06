@@ -34,7 +34,8 @@ export class Review {
     email: string;
     time: string;
     content: string;
-    constructor(content: string, email: string) {
+    rate: number;
+    constructor(content: string, email: string, rate: number) {
         this.content = content;
         this.email = email;
         this.time = new Date().toDateString();

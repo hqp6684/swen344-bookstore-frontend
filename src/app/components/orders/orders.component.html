@@ -1,7 +1,38 @@
+<md-toolbar>
+  <h3>Order History</h3>
+</md-toolbar>
 <md-card>
-  <md-card-title>My Order History</md-card-title>
   <md-card-content>
-    LIST of orders
+
+    <md-nav-list>
+      <md-list-item *ngFor="let order of orders|async" (click)="viewOrder(order)">
+        <md-icon md-list-avatar>{{getStatusIcon(order)}}</md-icon>
+        <!--<h3 md-line class="click-me" (click)="this.readMore(article)"> {{article.title}} </h3>-->
+        <p md-line>
+          <span> {{order.$key}} </span>
+        </p>
+        <span md-line>
+        </span>
+        <p md-line="">{{order.time|date:'medium'}}</p>
+        <div class="mat-list-text">
+          <span class="mat-line">Status</span>
+          <span class="mat-line">{{order.status}}</span>
+        </div>
+        <div class="mat-list-text">
+          <span class="mat-line">Quantity</span>
+          <span class="mat-line">{{order.books.length}}</span>
+        </div>
+        <div class="mat-list-text">
+          <span class="mat-line">Total</span>
+          <span class="mat-line">{{order.total|currency:'USD':true}}</span>
+        </div>
+        <button md-icon-button="" md-tooltip="Report problem">
+        <md-icon>report_problem</md-icon>
+        </button>
+      </md-list-item>
+    </md-nav-list>
+
+
   </md-card-content>
   <md-card-actions align="end">
     <button md-raised-button="" routerLink="/">Back</button>
