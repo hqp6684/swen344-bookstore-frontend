@@ -3,12 +3,19 @@
   <span class="md-toolbar-filler"></span>
   <!--<button md-button (click)="authService.login()" *ngIf="!authService.isAuthenticated()">Log In</button>-->
   <button md-button routerLink='/login' *ngIf="!authService.isAuthenticated()">Log In</button>
-  <button md-button (click)="authService.logout()" *ngIf="authService.isAuthenticated()">Log Out</button>
   <button md-button="" routerLink="/checkout">
     <md-icon>shopping_cart</md-icon> {{orderService.books.length}}
   </button>
-  <button md-button *ngIf="authService.isAuthenticated()" routerLink="/orders">
-    <md-icon>account_circle</md-icon>
-  </button>
+  <button md-button [mdMenuTriggerFor]="appMenu" *ngIf="authService.isAuthenticated()">
+   <md-icon>account_circle</md-icon>
+   {{authService.account.email}}
+</button>
 
 </md-toolbar>
+
+<md-menu #appMenu="mdMenu">
+  <button md-menu-item *ngIf="authService.isAuthenticated()" routerLink="/orders">
+    Orders
+  </button>
+  <button md-menu-item (click)="authService.logout()" *ngIf="authService.isAuthenticated()">Log Out</button>
+</md-menu>
