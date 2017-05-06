@@ -56,7 +56,7 @@
   </md-card-content>
   <md-card-actions align="end">
     <button md-raised-button="" routerLink='../'>Back</button>
-    <button md-raised-button="" color="warn">Cancel Order</button>
+    <button md-raised-button="" color="warn" (click)="openConfirmDialog()">Cancel Order</button>
     <!--<button md-raised-button="" color="primary" (click)="checkout()" [disabled]="this.orderService.books.length===0">Confirm</button>-->
   </md-card-actions>
 </md-card>

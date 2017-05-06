@@ -58,6 +58,9 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 
   ],
   providers: [AppService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    ConfirmDialogComponent
+  ]
 })
 export class AppModule { }

@@ -1,3 +1,4 @@
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { Order } from '../../shared/models/order';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../../core/services/authentication.service';
@@ -5,7 +6,7 @@ import { OrderService } from '../../core/services/order.service';
 import { Component, OnInit } from '@angular/core';
 import { FirebaseObjectObservable } from 'angularfire2/database';
 import { Book } from '../../shared/models/book';
-import { MdSnackBar } from '@angular/material';
+import { MdSnackBar, MdDialog, MdDialogConfig, MdDialogRef } from '@angular/material';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -15,11 +16,14 @@ import { FormControl } from '@angular/forms';
 })
 export class OrderDetailComponent implements OnInit {
   order = new Order();
+  confirmDiaglogRef: MdDialogRef<ConfirmDialogComponent>;
+
   constructor(
     public orderService: OrderService,
     public authService: AuthenticationService,
     public router: Router,
     public route: ActivatedRoute,
+    public dialog: MdDialog,
 
   ) { }
 
@@ -43,6 +47,23 @@ export class OrderDetailComponent implements OnInit {
       case 'Completed': return 'done';
       case 'Canceled': return 'cancel';
     }
+
+  }
+  openConfirmDialog() {
+    const dialogConfig: MdDialogConfig = {
+      // disableClose: true,
+
+      data: {
+        message: 'Do you want to cancel this order ?'
+      }
+    };
+
+
+    this.confirmDiaglogRef = this.dialog.open(ConfirmDialogComponent, dialogConfig);
+    this.confirmDiaglogRef.afterClosed()
+      .subscribe((confirm: boolean) => {
+        console.log(confirm);
+      })
 
   }
 
