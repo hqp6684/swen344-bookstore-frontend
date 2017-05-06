@@ -5,7 +5,7 @@
   <md-card-content>
 
     <md-nav-list>
-      <md-list-item *ngFor="let order of orders|async" (click)="viewOrder(order)">
+      <md-list-item *ngFor="let order of orders | async" (click)="viewOrder(order)">
         <md-icon md-list-avatar>{{getStatusIcon(order)}}</md-icon>
         <!--<h3 md-line class="click-me" (click)="this.readMore(article)"> {{article.title}} </h3>-->
         <p md-line>

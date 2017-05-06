@@ -4,9 +4,16 @@
 </md-toolbar>
 <md-card>
   <md-card-content>
+    <md-card-subtitle>
+      Placed by : <strong>{{order.email}}</strong>
+    </md-card-subtitle>
+    <md-card-subtitle>
+      {{order.time|date:'medium'}}
+    </md-card-subtitle>
+    <md-card-subtitle>Ship to: {{order.ship_to}} </md-card-subtitle>
     <md-nav-list>
       <md-list-item>
-        <h3 md-line> </h3>
+        <h3 md-line>{{order.$key}} </h3>
         <button md-button="" disabled>Order Status</button>
         <button md-button>{{order.status}}</button>
         <md-icon>{{getStatusIcon(order)}}</md-icon>
@@ -15,6 +22,11 @@
       <md-list-item>
         <md-icon md-list-icon>library_books</md-icon>
         <h3 md-line> <strong>({{order.books.length}})</strong></h3>
+        <!--<div class="mat-line-text">
+          <span class="mat-line">
+{{order.ship_to}}
+          </span>
+        </div>-->
       </md-list-item>
       <md-list-item *ngFor="let book of order.books; let i = index">
         <md-icon md-list-icon>book</md-icon>
@@ -50,13 +62,22 @@
         <button md-icon-button="" disabled></button>
       </md-list-item>
     </md-nav-list>
-    <md-card-subtitle>Ship to: {{order.ship_to}} </md-card-subtitle>
 
 
   </md-card-content>
   <md-card-actions align="end">
     <button md-raised-button="" routerLink='../'>Back</button>
-    <button md-raised-button="" color="warn" (click)="openConfirmDialog()">Cancel Order</button>
+    <ng-container [ngSwitch]="order.status">
+      <ng-container *ngSwitchCase="'Pending'">
+        <button md-raised-button="" color="warn" (click)="openConfirmCancelDialog()">Cancel Order</button>
+        <button md-raised-button="" color="primary" (click)="completeOrder()" *ngIf="authService.account.type==='admin'">Complete Order</button>
+      </ng-container>
+      <div *ngSwitchCase="'Completed'"></div>
+      <div *ngSwitchDefault>
+
+      </div>
+    </ng-container>
+
     <!--<button md-raised-button="" color="primary" (click)="checkout()" [disabled]="this.orderService.books.length===0">Confirm</button>-->
   </md-card-actions>
 </md-card>

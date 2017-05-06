@@ -1,3 +1,4 @@
+import { OrderService } from '../../core/services/order.service';
 import { AuthenticationService } from '../../core/services/authentication.service';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Book, Review } from '../../shared/models/book';
@@ -12,7 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./book-detail.component.scss']
 })
 export class BookDetailComponent implements OnInit {
-
+  canReview = false;
   bookUrl: string;
   book: Book = new Book();
   rate = 5;
@@ -22,7 +23,8 @@ export class BookDetailComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private db: AngularFireDatabase,
-    public authService: AuthenticationService
+    public authService: AuthenticationService,
+    public orderService: OrderService
   ) {
 
   }
@@ -44,18 +46,19 @@ export class BookDetailComponent implements OnInit {
       books[0].courses ? books[0].courses : books[0].courses = [];
       books[0].reviews ? books[0].reviews : books[0].reviews = new Array();
       this.book = books[0];
+      this.orderService.canReview(this.book.isbn).subscribe(result => {
+        this.canReview = result;
+      });
     });
 
   }
 
   addReview(content) {
     const review = new Review(content, this.authService.account.email, this.rate);
-    let ref = this.db.object('/books/'.concat(this.book.$key));
+    const ref = this.db.object('/books/'.concat(this.book.$key));
     this.book.reviews.push(review);
     ref.update(this.book);
 
-
-    console.log(content);
 
   }
 

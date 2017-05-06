@@ -20,7 +20,7 @@ export class OrdersComponent implements OnInit {
 
   ngOnInit() {
     this.orders = this.orderService.getOrders()
-      .map(value => { console.log(value); return value; });
+      .map(value => { return value; });
   }
 
 

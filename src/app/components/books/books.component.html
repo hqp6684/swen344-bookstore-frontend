@@ -31,7 +31,7 @@
       <button md-icon-button="" routerLink="{{book.isbn}}" md-tooltip="Rate, Review">
         <md-icon>rate_review</md-icon>
       </button>
-      <button md-icon-button="" (click)="addToCart(book)">
+      <button md-icon-button="" (click)="addToCart(book)" [disabled]="!book.available">
         <md-icon>add_shopping_cart</md-icon>
       </button>
     </md-card-actions>

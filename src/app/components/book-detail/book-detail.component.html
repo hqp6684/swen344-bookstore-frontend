@@ -47,6 +47,7 @@
   <div>
     <button md-raised-button="" routerLink='/'>Back</button>
     <button md-raised-button="" color="primary" routerLink="edit">Edit</button>
+    <button md-raised-button="" color="primary" (click)="orderService.addBook(book)">Add To Cart</button>
   </div>
 </md-card>
 
@@ -75,8 +76,11 @@
     </md-nav-list>
   </md-card-content>
   <md-card-actions>
+    <md-card-subtitle>
+      <p *ngIf="!canReview">You have not purchased this book</p>
+    </md-card-subtitle>
     <md-input-container style="min-width: 50%">
-      <textarea mdInput #reviewInput placeholder="Review"></textarea>
+      <textarea mdInput #reviewInput placeholder="Review" [disabled]="!canReview"></textarea>
     </md-input-container>
     <md-select placeholder="Star(s)" [(ngModel)]="rate" name="rate">
       <md-option *ngFor="let rate of [1,2,3,4,5]" [value]="rate">

@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Rx';
+import { AsyncSubject, Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
 import { Order } from '../../shared/models/order';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
@@ -46,5 +46,51 @@ export class OrderService {
       }
     });
   }
+
+  updateBookCount(isbn: string, count: number) {
+    this.db.list('/books', {
+      query: {
+        orderByChild: 'isbn',
+        equalTo: isbn
+      }
+    }).subscribe((books: Book[]) => {
+      const firebook = books[0];
+      firebook.count = Number(firebook.count) - count;
+      this.db.object('/books/'.concat(firebook.$key)).update(firebook);
+    });
+
+  }
+
+  canReview(isbn: string): Observable<boolean> {
+    const result = new AsyncSubject<boolean>();
+    if (!this.authService.isAuthenticated()) {
+      result.next(false);
+      result.complete();
+    }
+    this.db.list('/orders', {
+      query: {
+        orderByChild: 'email',
+        equalTo: this.authService.account.email
+      }
+
+    }).subscribe((orders: Order[]) => {
+      orders.map(order => {
+        if (order.status === 'Completed') {
+          order.books.map(book => {
+            if (book.isbn === isbn) {
+              result.next(true);
+              result.complete();
+            }
+          });
+        }
+      });
+      result.next(false);
+      result.complete();
+
+    });
+    return result;
+
+  }
+
 
 }
