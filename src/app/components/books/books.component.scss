@@ -8,4 +8,13 @@ md-card {
     md-card-subtitle {
         cursor: pointer;
     }
+    ;
+    opacity: .8;
+    &:hover {
+        opacity: 1; // transform: translateY(-3px);
+        transition: 0.2s;
+        transition-timing-function: ease-in;
+    }
+    transform: translateY(0);
+    transition-timing-function: ease-out;
 }
