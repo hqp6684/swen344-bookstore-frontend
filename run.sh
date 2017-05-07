@@ -1,5 +1,5 @@
 #!/bin/bash
-git --work-tree=/app/sandboxes/git/frontend --git-dir=/repos/frontend.git checkout production
+git --work-tree=/app/sandboxes/git/frontend --git-dir=/repos/frontend.git checkout
 cd /app/sandboxes/git/frontend
 npm install
 ng build --prod --aot
