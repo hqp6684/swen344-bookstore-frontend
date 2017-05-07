@@ -1,4 +1,5 @@
 <md-sidenav-container fullscreen>
+  <div #container></div>
   <app-header></app-header>
   <router-outlet></router-outlet>
 
@@ -7,3 +8,40 @@
     <md-card-footer></md-card-footer>
   </md-card>
 </md-sidenav-container>
+
+
+<span class="app-fab">
+  <button md-mini-fab [mdMenuTriggerFor]="appMenu">
+    <md-icon>more_vert</md-icon>
+  </button>
+</span>
+<span class="go-top" *ngIf="showGoTop">
+  <button md-mini-fab="" color="accent" md-tooltip="Go top"  (click)="goTop()">
+    <md-icon>arrow_upward</md-icon>
+  </button>
+</span>
+
+
+<md-menu #appMenu="mdMenu">
+  <button md-menu-item routerLink="/">
+  <md-icon>home</md-icon>
+    Home
+  </button>
+  <button md-menu-item *ngIf="authService.isAuthenticated()" routerLink="/orders">
+  <md-icon>list</md-icon>
+    Order History
+  </button>
+  <button md-menu-item *ngIf="authService.isAuthenticated() && authService.account.type !== 'student'" routerLink="/books/new">
+  <md-icon>create</md-icon>
+    Create book
+  </button>
+  <button md-menu-item="" md-tooltip="Go top" (click)="goTop()">
+    <md-icon>arrow_upward</md-icon> Go top
+  </button>
+  <button md-menu-item (click)="authService.logout()" *ngIf="authService.isAuthenticated()">
+    <md-icon>exit_to_app</md-icon>
+    Log Out</button>
+  <button md-menu-item routerLink="/login" *ngIf="!authService.isAuthenticated()">
+    <md-icon>exit_to_app</md-icon>
+    Log In</button>
+</md-menu>

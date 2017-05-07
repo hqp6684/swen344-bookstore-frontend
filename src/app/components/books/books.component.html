@@ -1,5 +1,5 @@
 <md-toolbar>
-  <button md-button routerLink="/books/new">New Book</button>
+  <!--<button md-button routerLink="/books/new">New Book</button>-->
   <span fxFlex="1 1 auto"></span>
   <md-select mdPrefix placeholder="Currency" [(ngModel)]="currencyType">
     <md-option *ngFor="let currency of currencyTypes" [value]="currency">
@@ -24,11 +24,11 @@
     <img md-card-image src="{{book.thumbnail_url ?book.thumbnail_url :'https://islandpress.org/sites/default/files/400px%20x%20600px-r01BookNotPictured.jpg'}}"
       alt="" routerLink="{{book.isbn}}">
     <md-card-subtitle routerLink="{{book.isbn}}"><strong>{{book.title}}</strong></md-card-subtitle>
-    <md-card-subtitle style="color:red" routerLink="{{book.isbn}}">{{book.price|currency:currencyType: true}}</md-card-subtitle>
+    <md-card-subtitle style="color:red" routerLink="{{book.isbn}}">{{book.price| currencyConverter:currencyType | currency:currencyType: true}}</md-card-subtitle>
 
 
     <md-card-actions align="end">
-      <button md-icon-button="" routerLink="{{book.isbn}}/edit" md-tooltip="Edit"><md-icon>edit</md-icon></button>
+      <button md-icon-button="" routerLink="{{book.isbn}}/edit" md-tooltip="Edit" *ngIf="authService.isAuthenticated() && authService.account.type !== 'student'"><md-icon>edit</md-icon></button>
       <button md-icon-button="" routerLink="{{book.isbn}}" md-tooltip="Rate, Review">
         <md-icon>rate_review</md-icon>
       </button>

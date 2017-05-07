@@ -1,3 +1,4 @@
+import { AuthenticationService } from '../../core/services/authentication.service';
 import { OrderService } from '../../core/services/order.service';
 import { FormControl } from '@angular/forms';
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -20,13 +21,14 @@ export class BooksComponent implements OnInit {
   searchByValue = this.searchByValues[0];
 
   searchFormControl: FormControl = new FormControl();
-  currencyTypes = ['USD', 'EUR', 'GBP', 'GBP', 'JPY']; currencyType = 'USD';
+  currencyTypes = ['USD', 'EUR', 'GBP', 'JPY']; currencyType = 'USD';
 
 
   constructor(
     private db: AngularFireDatabase,
     public orderService: OrderService,
-    public snackBar: MdSnackBar
+    public snackBar: MdSnackBar,
+    public authService: AuthenticationService
   ) { }
 
   ngOnInit() {
@@ -117,8 +119,5 @@ export class BooksComponent implements OnInit {
 
   addToCart(book: Book) {
     this.orderService.addBook(book);
-    this.snackBar.open(`${book.title} has been added to your cart`, 'Dismiss', {
-      duration: 2000
-    });
   }
 }

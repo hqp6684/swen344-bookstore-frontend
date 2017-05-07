@@ -15,7 +15,14 @@
 
 <md-menu #appMenu="mdMenu">
   <button md-menu-item *ngIf="authService.isAuthenticated()" routerLink="/orders">
-    Orders
+  <md-icon>list</md-icon>
+    Order History
   </button>
-  <button md-menu-item (click)="authService.logout()" *ngIf="authService.isAuthenticated()">Log Out</button>
+  <button md-menu-item *ngIf="authService.isAuthenticated() && authService.account.type !== 'student'" routerLink="/books/new">
+  <md-icon>create</md-icon>
+    Create book
+  </button>
+  <button md-menu-item (click)="authService.logout()" *ngIf="authService.isAuthenticated()">
+    <md-icon>exit_to_app</md-icon>
+    Log Out</button>
 </md-menu>

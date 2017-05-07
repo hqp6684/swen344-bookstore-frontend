@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { CurrencyConverterPipe } from './pipes/currency-converter.pipe';
 
 
 @NgModule({
@@ -24,8 +25,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MaterialModule,
     HttpModule,
     FlexLayoutModule,
+    CurrencyConverterPipe
 
   ],
-  declarations: []
+  declarations: [CurrencyConverterPipe]
 })
 export class SharedModule { }

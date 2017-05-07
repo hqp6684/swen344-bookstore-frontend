@@ -58,7 +58,18 @@ export class BookDetailComponent implements OnInit {
     const ref = this.db.object('/books/'.concat(this.book.$key));
     this.book.reviews.push(review);
     ref.update(this.book);
+  }
 
+  addToCart(book: Book) {
+    this.orderService.addBook(book);
+  }
+
+  getRate(score: number) {
+    const rates = [];
+    for (let i = 1; i <= score; i++) {
+      rates.push('a');
+    }
+    return rates;
 
   }
 

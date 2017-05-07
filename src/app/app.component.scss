@@ -2,3 +2,23 @@
     position: relative;
     bottom: 0
 }
+
+.app-fab {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    opacity: .5;
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.go-top {
+    position: fixed;
+    bottom: 70px;
+    right: 15px;
+    opacity: .5;
+    &:hover {
+        opacity: 1;
+    }
+}

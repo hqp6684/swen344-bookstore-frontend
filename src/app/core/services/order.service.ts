@@ -20,6 +20,10 @@ export class OrderService {
 
   addBook(book: Book) {
     this.books.push(book);
+
+    this.snackBar.open(`${book.title} has been added to your cart`, 'Dismiss', {
+      duration: 2000
+    });
   }
 
 
@@ -66,6 +70,7 @@ export class OrderService {
     if (!this.authService.isAuthenticated()) {
       result.next(false);
       result.complete();
+      return result;
     }
     this.db.list('/orders', {
       query: {

@@ -39,6 +39,7 @@ export class Review {
         this.content = content;
         this.email = email;
         this.time = new Date().toDateString();
+        this.rate = rate;
     }
 }
 

@@ -34,9 +34,9 @@
 
     <div style="margin-top:10px">
       <md-input-container>
-        <i mdPrefix>$</i><input disabled mdInput placeholder="Price" required [(ngModel)]="book.price">
+        <input disabled mdInput placeholder="Price" required value="{{book.price | currency : 'USD' : true}}">
       </md-input-container>
-      <md-input-container>
+      <md-input-container *ngIf="authService.isAuthenticated() && authService.account.type ==='admin'">
         <input mdInput placeholder="Count" disabled type="number" min="0" [(ngModel)]="book.count">
       </md-input-container>
       <md-checkbox disabled [(ngModel)]="book.available">Available</md-checkbox>
@@ -46,7 +46,7 @@
 
   <div>
     <button md-raised-button="" routerLink='/'>Back</button>
-    <button md-raised-button="" color="primary" routerLink="edit">Edit</button>
+    <button md-raised-button="" color="primary" routerLink="edit" *ngIf=" authService.isAuthenticated() && authService.account.type !=='student'">Edit</button>
     <button md-raised-button="" color="primary" (click)="orderService.addBook(book)">Add To Cart</button>
   </div>
 </md-card>
@@ -55,7 +55,7 @@
   <md-card-title>Reviews</md-card-title>
   <md-card-content>
     <p *ngIf="this.book.reviews.length === 0">
-      :=( Your list is empty
+      :=( There is no review for this book yet.
     </p>
     <md-nav-list>
       <md-list-item *ngFor="let review of this.book.reviews">
@@ -66,7 +66,7 @@
           <span> {{review.content}} </span>
         </p>
         <span md-line>
-        <md-icon *ngFor="let rate of [1,2,3,4,5]">star_rate</md-icon>
+        <md-icon *ngFor="let rate of getRate(review.rate)">star_rate</md-icon>
         </span>
         <p md-line="">{{review.time|date:'medium'}} by {{review.email}}</p>
         <button md-icon-button="" md-tooltip="Report problem">

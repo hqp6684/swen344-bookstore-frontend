@@ -3,8 +3,8 @@ import { AuthenticationService } from '../../core/services/authentication.servic
 import { Book } from '../../shared/models/book';
 import { Order } from '../../shared/models/order';
 import { OrderService } from '../../core/services/order.service';
-import { Component, OnInit } from '@angular/core';
-import { MdSnackBar } from '@angular/material';
+import { Component, OnInit, ElementRef } from '@angular/core';
+import { MdSnackBar, ScrollDispatcher } from '@angular/material';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -27,9 +27,12 @@ export class CheckoutComponent implements OnInit {
     public snackBar: MdSnackBar,
     public authService: AuthenticationService,
     public router: Router,
+    public sd: ScrollDispatcher,
+    public elRef: ElementRef
   ) { }
 
   ngOnInit() {
+
     this.calculateTotal();
     this.discountFormControl
       .valueChanges

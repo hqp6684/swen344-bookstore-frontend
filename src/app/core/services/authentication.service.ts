@@ -75,7 +75,7 @@ export class AuthenticationService {
     localStorage.clear();
     this.account = null;
     this.authenticated = false;
-    this.router.navigate(['/home']);
+    this.router.navigate(['/']);
   }
 
   getProfile() {
