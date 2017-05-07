@@ -106,7 +106,7 @@ export class NewBookComponent implements OnInit {
 
       // })
       .flatMap(value => {
-        return this.http.get(`https://tigercenter.rit.edu/tigerCenterSearch/api/auto?terms=${value}`)
+        return this.http.get(`https://crossorigin.me/https://tigercenter.rit.edu/tigerCenterSearch/api/auto?terms=${value}`)
           .map(res => {
             return res.json().autoResults;
           });
