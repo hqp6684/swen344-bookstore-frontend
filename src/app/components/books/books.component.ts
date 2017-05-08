@@ -37,8 +37,10 @@ export class BooksComponent implements OnInit {
 
   ngOnInit() {
     this.db.list('/books').subscribe(values => {
+      this.books = [];
+      this.filteredBooks = [];
+
       values.map((v, i) => {
-        this.books = [];
         setTimeout(() => {
           v.authors ? v.authors : v.authors = [];
           v.courses ? v.courses : v.courses = [];
