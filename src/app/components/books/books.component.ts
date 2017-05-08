@@ -3,17 +3,21 @@ import { OrderService } from '../../core/services/order.service';
 import { FormControl } from '@angular/forms';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Rx';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { Book } from '../../shared/models/book';
 import { MdSnackBar } from '@angular/material';
+import { routerTransition } from '../../shared/animations/route-transition.animation';
 
 
 @Component({
   selector: 'app-books',
   templateUrl: './books.component.html',
-  styleUrls: ['./books.component.scss']
+  styleUrls: ['./books.component.scss'],
+  animations: [routerTransition()],
+  // host: { '[@routerTransition]': '' }
 })
 export class BooksComponent implements OnInit {
+  @HostBinding('@routerTransition') routeAnimation = '';
 
   filteredBooks: Book[] = [];
   private books: Book[] = [];

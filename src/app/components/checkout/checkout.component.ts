@@ -6,13 +6,18 @@ import { OrderService } from '../../core/services/order.service';
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { MdSnackBar, ScrollDispatcher } from '@angular/material';
 import { FormControl } from '@angular/forms';
+import { HostBinding } from '@angular/core';
+import { routerTransition } from '../../shared/animations/route-transition.animation';
 
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.scss']
+  styleUrls: ['./checkout.component.scss'],
+
+  animations: [routerTransition()]
 })
 export class CheckoutComponent implements OnInit {
+  @HostBinding('@routerTransition') routeAnimation = '';
   subtotal = 0;
   total = 0;
   discount = 0;

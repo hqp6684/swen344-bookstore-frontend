@@ -5,12 +5,17 @@ import { Validators, FormGroup, FormBuilder, FormControl } from '@angular/forms'
 import { Router } from '@angular/router';
 // import { AngularFireDatabase } from 'angularfire2/
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { HostBinding } from '@angular/core';
+import { routerTransition } from '../../shared/animations/route-transition.animation';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  animations: [routerTransition()]
 })
 export class LoginComponent implements OnInit {
+  @HostBinding('@routerTransition') routeAnimation = '';
+
 
   form: FormGroup;
   emailFormControl: FormControl = new FormControl();

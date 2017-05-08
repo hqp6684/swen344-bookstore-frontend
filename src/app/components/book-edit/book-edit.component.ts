@@ -7,12 +7,20 @@ import { FormControl } from '@angular/forms';
 import { Book, Author } from '../../shared/models/book';
 import { MdSnackBar } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
+
+import { HostBinding } from '@angular/core';
+import { routerTransition } from '../../shared/animations/route-transition.animation';
 @Component({
   selector: 'app-book-edit',
   templateUrl: './book-edit.component.html',
-  styleUrls: ['./book-edit.component.scss']
+  styleUrls: ['./book-edit.component.scss'],
+  animations: [routerTransition()]
+
 })
 export class BookEditComponent implements OnInit {
+
+  @HostBinding('@routerTransition') routeAnimation = '';
+
   isbnStatus = '';
   isbnFormControl = new FormControl();
   authorFormControl = new FormControl();

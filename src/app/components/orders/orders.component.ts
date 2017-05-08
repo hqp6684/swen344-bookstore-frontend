@@ -5,12 +5,17 @@ import { OrderService } from '../../core/services/order.service';
 import { AuthenticationService } from '../../core/services/authentication.service';
 import { Component, OnInit } from '@angular/core';
 
+import { HostBinding } from '@angular/core';
+import { routerTransition } from '../../shared/animations/route-transition.animation';
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
-  styleUrls: ['./orders.component.scss']
+  styleUrls: ['./orders.component.scss'],
+  animations: [routerTransition()]
 })
 export class OrdersComponent implements OnInit {
+  @HostBinding('@routerTransition') routeAnimation = '';
+
   orders: Observable<Order[]>;
   constructor(
     public authService: AuthenticationService,

@@ -6,13 +6,18 @@ import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HostBinding } from '@angular/core';
+import { routerTransition } from '../../shared/animations/route-transition.animation';
 
 @Component({
   selector: 'app-book-detail',
   templateUrl: './book-detail.component.html',
-  styleUrls: ['./book-detail.component.scss']
+  styleUrls: ['./book-detail.component.scss'],
+  animations: [routerTransition()]
+
 })
 export class BookDetailComponent implements OnInit {
+  @HostBinding('@routerTransition') routeAnimation = '';
   canReview = false;
   bookUrl: string;
   book: Book = new Book();
